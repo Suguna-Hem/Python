@@ -1,0 +1,27 @@
+import json
+json_file=open("data.json","r")
+data=json.load(json_file)
+json_file.close()
+check={'Monday':{},'Tuesday':{},"Wednesday":{},'Thursday':{},'Friday':{}}
+for lis in data:
+    a,b,c = lis
+    sm=0
+    for k,v in c['conference-categories-count'].items():
+        sm=sm+v
+    #print(sm)
+
+    if a['dow'] == "Monday":
+        check['Monday'].update({b['time']:sm})
+    elif a['dow'] == "Tuesday":
+         check['Tuesday'].update({ b['time']:sm})
+    elif a['dow'] == "Wednesday":
+        check['Wednesday'].update({ b['time']:sm})
+    elif a['dow'] == "Thursday":
+        check['Thursday'].update({ b['time']:sm})
+    elif a['dow'] == "Friday":
+        check['Friday'].update({b['time']:sm})
+#print(check)
+
+
+for k,v in check.items():
+    print(k + " ===> " + str(v))
